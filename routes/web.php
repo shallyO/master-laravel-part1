@@ -16,3 +16,32 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('products', function () {
+    return 'wow wow wow';
+})->name('products.index');
+
+Route::get('products/create', function () {
+    return 'return a form';
+})->name('products.create');
+
+Route::post('products', function () {
+
+})->name('products.store');
+
+Route::get('products/{product}', function ($product) {
+    return "Showing a product {$product}";
+})->name('products.show');
+
+Route::get('products/{product}/edit', function ($product) {
+    return "Showing a form to edit {$product}";
+})->name('products.edit');
+
+Route::match(['put', 'patch'],'products/{product}/edit', function ($product) {
+    return "Showing a form to edit {$product}";
+})->name('products.update');
+
+Route::delete('products/{product}', function ($product) {
+
+})->name('products.destroy');
+
