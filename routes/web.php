@@ -17,31 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('products', function () {
-    return 'wow wow wow';
-})->name('products.index');
+Route::get('products', 'ProductController@index')->name('products.index');
 
-Route::get('products/create', function () {
-    return 'return a form';
-})->name('products.create');
+Route::get('products/create', 'ProductController@create')->name('products.create');
 
-Route::post('products', function () {
+Route::post('products','ProductController@store')->name('products.store');
 
-})->name('products.store');
+Route::get('products/{product}' ,'ProductController@show')->name('products.show');
 
-Route::get('products/{product}', function ($product) {
-    return "Showing a product {$product}";
-})->name('products.show');
+Route::get('products/{product}/edit', )->name('products.edit');
 
-Route::get('products/{product}/edit', function ($product) {
-    return "Showing a form to edit {$product}";
-})->name('products.edit');
+Route::match(['put', 'patch'],'products/{product}/edit', 'ProductController@update')->name('products.update');
 
-Route::match(['put', 'patch'],'products/{product}/edit', function ($product) {
-    return "Showing a form to edit {$product}";
-})->name('products.update');
-
-Route::delete('products/{product}', function ($product) {
-
-})->name('products.destroy');
+Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy');
 
